@@ -1,5 +1,7 @@
 # 多 AI 议事助手
 
+> 当前版本：**v1.0.0**
+
 一个本地运行的多 AI 圆桌讨论工具。让多家大模型 AI 像微信群聊一样依次发言、互相补充、辩论交锋，帮你从多个视角深入分析问题。
 
 ## 功能特性
@@ -31,7 +33,7 @@ cd multi-ai-discuss
 
 ### 2. 配置 API Key
 
-双击 `启动工具.bat`（Windows）或运行 `python server.py`，浏览器会自动打开 `http://localhost:8787`。
+双击 `start.bat`（Windows）或运行 `python server.py`，浏览器会自动打开 `http://localhost:8787`。
 
 进入「AI 席位设置」页，填入你自己的 API Key：
 
@@ -85,7 +87,7 @@ AI 会根据阶段调整发言策略：
 
 ### 实时保存
 
-- 每个 AI 发言完就自动保存到 `讨论记录/` 目录
+- 每个 AI 发言完就自动保存到 `discussions/` 目录
 - 文件名格式：`YYYYMMDD_HHMMSS_主题.md`
 - 同一场讨论（包括继续讨论）会覆盖保存到同一个文件
 - 关闭浏览器或意外退出也不会丢失讨论内容
@@ -94,12 +96,12 @@ AI 会根据阶段调整发言策略：
 
 ```
 multi-ai-discuss/
-├── index.html          # 主页面（单文件，包含所有 UI 和逻辑）
-├── server.py           # 本地代理服务器（托管页面 + 转发 API 请求）
-├── 启动工具.bat         # Windows 一键启动脚本
-├── 讨论任务.md          # 讨论任务模板
-├── 讨论记录/            # 讨论记录保存目录（自动生成）
-└── README.md           # 本文件
+├── index.html              # 主页面（单文件，包含所有 UI 和逻辑）
+├── server.py               # 本地代理服务器（托管页面 + 转发 API 请求）
+├── start.bat               # Windows 一键启动脚本
+├── discussion-template.md  # 讨论任务模板
+├── discussions/            # 讨论记录保存目录（自动生成）
+└── README.md               # 本文件
 ```
 
 ## 技术架构
