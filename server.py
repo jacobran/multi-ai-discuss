@@ -16,8 +16,10 @@ import time
 from datetime import datetime
 
 PORT = 8787
+VERSION = "v1.0.0"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 HTML_PATH = os.path.join(BASE_DIR, "index.html")
+DISCUSSION_DIR = os.path.join(BASE_DIR, "discussions")
 
 
 class ProxyHandler(http.server.BaseHTTPRequestHandler):
@@ -77,7 +79,6 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
                     self.end_headers()
                     self.wfile.write(resp_body)
             except urllib.error.HTTPError as e:
-                # API 返回错误状态码，原样透传给浏览器
                 resp_body = e.read()
                 self.send_response(e.code)
                 ct = e.headers.get("Content-Type", "application/json")
@@ -102,7 +103,7 @@ class ProxyHandler(http.server.BaseHTTPRequestHandler):
             raw = self.rfile.read(content_length)
             data = json.loads(raw.decode("utf-8"))
 
-            save_dir = os.path.join(BASE_DIR, "讨论记录")
+            save_dir = DISCUSSION_DIR
             os.makedirs(save_dir, exist_ok=True)
 
             now = datetime.now()
@@ -186,7 +187,7 @@ def open_browser():
 
 if __name__ == "__main__":
     print("=" * 50)
-    print("  多 AI 议事助手 - 本地代理已启动")
+    print("  多 AI 议事助手 " + VERSION + " - 本地代理已启动")
     print("  浏览器地址: http://localhost:%d" % PORT)
     print("  按 Ctrl+C 停止服务")
     print("=" * 50)
